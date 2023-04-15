@@ -1,0 +1,93 @@
+@import '../../common/squirrel.module.scss';
+
+.content {
+  margin-bottom: 16px;
+
+  .header {
+    margin: 0 8px !important;
+    font-weight: 600;
+    font-size: 20px;
+
+    .hItem {
+      padding: 8px 0;
+      margin-bottom: 8px;
+      display: inline-block;
+      cursor: pointer;
+      vertical-align: middle;
+      line-height: 1.13;
+
+      a {
+        color: $squirrel-pink;
+        text-decoration-line: none;
+        font-size: 14px;
+      }
+    }
+
+    & h2{
+        text-transform: capitalize;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 1.13;
+    }
+
+    .activeFeed {
+      cursor: default;
+      border-bottom: 2px solid pink;
+      color: black;
+      font-weight: bolder;
+    }
+  }
+
+  .items {
+    .item {
+      border-bottom: 1px solid lightgrey;
+      min-height: 113px;
+      display: flex;
+      align-items: center;
+      margin: 0px;
+
+      .link {
+        text-decoration: none;
+
+        // &:hover {
+        //   text-decoration: underline;
+        // }
+      }
+
+      .type {
+        &.anniversaryType {
+          position: relative;
+        }
+
+        p {
+          margin: 5px 0 0 0;
+          text-align: center;
+          font-size: 14px;
+          color: #000;
+
+          &.number {
+            position: absolute;
+            left: 50%;
+            bottom: 42px;
+            transform: translateX(-50%);
+          }
+        }
+
+        img {
+          margin: auto;
+          display: block;
+          transform: scaleX(-1);
+
+          &.anniversary {
+            width: 48px;
+            height: 48px;
+          }
+        }
+      }
+    }
+  }
+
+  .allLink {
+    float: right;
+  }
+}

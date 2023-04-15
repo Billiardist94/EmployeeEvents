@@ -1,0 +1,16 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": false,
+    "version": "1.15.2",
+    "libraryName": "employee-events",
+    "libraryId": "34f35cc0-197e-4491-93db-684799fbb348",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "employee-events",
+    "solutionShortDescription": "employee-events description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

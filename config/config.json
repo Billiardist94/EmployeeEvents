@@ -1,0 +1,47 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "employee-events-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/employeeEvents/EmployeeEventsWebPart.js",
+          "manifest": "./src/webparts/employeeEvents/EmployeeEventsWebPart.manifest.json"
+        }
+      ]
+    },
+    "new-comers-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/newComers/NewComersWebPart.js",
+          "manifest": "./src/webparts/newComers/NewComersWebPart.manifest.json"
+        }
+      ]
+    },
+    "recognitions-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/recognitions/RecognitionsWebPart.js",
+          "manifest": "./src/webparts/recognitions/RecognitionsWebPart.manifest.json"
+        }
+      ]
+    },
+    "anniversaries-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/anniversaries/AnniversariesWebPart.js",
+          "manifest": "./src/webparts/anniversaries/AnniversariesWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "EmployeeEventsWebPartStrings": "lib/webparts/employeeEvents/loc/{locale}.js",
+    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js",
+    "NewComersWebPartStrings": "lib/webparts/newComers/loc/{locale}.js",
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
+    "RecognitionsWebPartStrings": "lib/webparts/recognitions/loc/{locale}.js",
+    "AnniversariesWebPartStrings": "lib/webparts/anniversaries/loc/{locale}.js"
+  }
+}

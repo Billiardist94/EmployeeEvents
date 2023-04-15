@@ -1,0 +1,39 @@
+@import '~office-ui-fabric-react/dist/sass/References.scss';
+
+.recognitions {
+  display: flex;
+  flex-direction: column;
+
+  .webPartHeader {
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  .personItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #d3d3d3;
+    padding: 15px 0;
+    
+    .div[class*="livePersonaCard"] {
+      width: 240px;
+    }
+
+    .personContent {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 130px;
+
+      .personImg {
+        margin: 0 0 5px 0;
+      }
+
+      .personText {
+        margin: 0;
+      }
+    }
+
+  }
+}
