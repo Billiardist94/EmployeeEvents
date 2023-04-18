@@ -3,7 +3,7 @@
   "solution": {
     "name": "employee-events-client-side-solution",
     "id": "34f35cc0-197e-4491-93db-684799fbb348",
-    "version": "1.0.0.1",
+    "version": "1.0.0.4",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "webApiPermissionRequests": [

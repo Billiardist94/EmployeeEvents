@@ -20,6 +20,7 @@ export class PersonService implements IPersonService {
       .catch(error => { console.error(error); });
 
     return Promise.all([allUsers]).then(() => {
+      console.log('users New Arrival: ', users)
       return users.sort((a, b) => a.eventDate.valueOf() - b.eventDate.valueOf());
     });
   }
@@ -33,8 +34,8 @@ export class PersonService implements IPersonService {
     const filterDate = moment().subtract(this._daysInterval ? this._daysInterval : 1, 'd');
     return graph
       .users
-      .select("givenName", "surname", "employeeHireDate", "id", "userPrincipalName", "jobTitle", "companyName")
-      .filter(`companyName eq 'Globalgig'`)
+      .select("givenName", "surname", "employeeHireDate", "id", "userPrincipalName", "jobTitle", "companyName",  "createdDateTime")
+      .filter(`companyName eq 'Globalgig' and createdDateTime ge ${filterDate.toISOString()}`)
       // .filter(`employeeHireDate ge ${filterDate.toISOString()}`)
       .count
       .top(200)
@@ -42,7 +43,6 @@ export class PersonService implements IPersonService {
         headers: { ConsistencyLevel: 'eventual' }
       })
       .then((usersList) => {
-        console.log("usersList New Arrival: ", usersList)
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return usersList.map((item: any) => {
           return {
@@ -51,7 +51,7 @@ export class PersonService implements IPersonService {
             lastName: item.surname,
             email: item.userPrincipalName,
             userId: Number(item.id),
-            eventDate: moment(item.employeeHireDate),
+            eventDate: moment(item.createdDateTime),
             eventType: 'New Arrival',
             type: 'newcomer',
             jobTitle: item.jobTitle

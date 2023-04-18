@@ -22,7 +22,6 @@ export class PersonService implements IPersonService {
       .catch(error => { console.error(error); });
 
     return Promise.all([allUsers]).then(() => {
-      console.log("users anniversary: ", users)
       return users.sort((a, b) => a.eventDate.valueOf() - b.eventDate.valueOf());
     });
   }

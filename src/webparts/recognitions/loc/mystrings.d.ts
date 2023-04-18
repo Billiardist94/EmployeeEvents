@@ -6,6 +6,7 @@ declare interface IRecognitionsWebPartStrings {
   AppLocalEnvironmentTeams: string;
   AppSharePointEnvironment: string;
   AppTeamsTabEnvironment: string;
+  NumberOfItemsToDisplayLabel: string;
   TimeIntervalToDisplay: string;
 }
 

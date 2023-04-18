@@ -29,7 +29,7 @@ export default class Anniversaries extends React.Component<IAnniversariesProps, 
 
   public render(): React.ReactElement<IAnniversariesProps> {
     const { items } = this.state;
-    const { isOpenInNewTab, showAll, displayNumber, seeAllLink, context } = this.props;
+    const { isOpenInNewTab, showAll, displayNumber, seeAllLink, context, description } = this.props;
     let control = <div>
       <Spinner label='Loading...' />
     </div>;
@@ -43,11 +43,9 @@ export default class Anniversaries extends React.Component<IAnniversariesProps, 
             return <PersonItemElement key={item.id} person={item} service={this.props.service} profilePageUrl={this.props.profilePageUrl} context={context} />;
           });
 
-        control = <div>
-          <div>
-            {usersList}
-          </div>
-        </div>;
+        control = <>
+          {usersList}
+          </>
       } else {
         control = <div>
           <div>
@@ -58,9 +56,10 @@ export default class Anniversaries extends React.Component<IAnniversariesProps, 
     }
 
     return (
-      <div>
+      <section className={styles.recognitions}>
+        <h2 className={styles.webPartHeader}>{description}</h2>
         {control}
-      </div>
+      </section>
     );
   }
 

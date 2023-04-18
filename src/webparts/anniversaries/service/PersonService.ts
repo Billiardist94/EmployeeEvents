@@ -1,68 +1,80 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Person } from "./Person";
 import { IPersonService } from "./IPersonService";
-import { Fields, personType, Settings } from '../Constants';
 import moment from "moment";
-
-import { sp } from "@pnp/sp/presets/all";
-import { graph } from '@pnp/pnpjs';
+import { graph } from "@pnp/pnpjs";
 
 export class PersonService implements IPersonService {
-    private _daysInterval: number;
+  private _daysInterval: number;
 
-    constructor(daysInterval: number) {
-        this._daysInterval = daysInterval;
+  constructor(daysInterval: number) {
+    this._daysInterval = daysInterval;
+  }
+
+  public get(): Promise<Array<Person>> {
+    let users = new Array<Person>();
+    const processResultUsers = (items: Array<Person>): void => { users = users.concat(items); };
+
+    const allUsers = this.getAllUsers();
+    allUsers
+      .then(processResultUsers)
+      .catch(error => { console.error(error); });
+
+    return Promise.all([allUsers]).then(() => {
+      return users.sort((a, b) => a.eventDate.valueOf() - b.eventDate.valueOf());
+    });
+  }
+
+  public getUserPicture(email: string): Promise<Blob> {
+    return graph.users.getById(email).photo.getBlob()
+      .catch(error => { console.error(error); return null; });
+  }
+
+  private getAllUsers(): Promise<Array<Person>> {
+    const filterDateAfter = moment().add(this._daysInterval, 'd');
+    const filterDateBefore = moment().subtract(this._daysInterval, 'd');
+    const getEndOfNumber = (years: number) => {
+      switch (years) {
+        case 1:
+          return "Year";
+          break;
+        default:
+          return "Years"
+          break;
+      }
     }
+    return graph.users
+      .select("givenName", "surname", "employeeHireDate", "id", "userPrincipalName", "companyName", "createdDateTime")
+      .filter(`companyName eq 'Globalgig'`)
+      // .filter(`employeeHireDate ge ${filterDate.toISOString()}`)
+      .count
+      .top(200)
+      .get({
+        headers: { ConsistencyLevel: 'eventual' }
+      })
+      .then((results) => {
+        const usersList = results
+          .filter((item: any) => (moment().year() - moment(item.createdDateTime).year()) !== 0)
+          
+          .filter((item: any) => {
+            const anniversaryDate = moment(item.createdDateTime).year(moment().year());
+            return anniversaryDate >= filterDateBefore &&
+              anniversaryDate <= filterDateAfter;
+          });
 
-    public get(): Promise<Array<Person>> {
-        let users = new Array<Person>();
-        const processResultUsers = (items: Array<Person>): void => { users = users.concat(items); };
-        const recognition = this.getRecognition();
-        recognition
-            .then(processResultUsers)
-            .catch(error => { console.error(error); });
-
-        return Promise.all([recognition]).then(() => {
-            return users.sort((a, b) => a.eventDate.valueOf() - b.eventDate.valueOf());
+        return usersList.map((item: any) => {
+          return {
+            id: item.id,
+            firstName: item.givenName,
+            lastName: item.surname,
+            email: item.userPrincipalName,
+            userId: Number(item.id),
+            eventDate: moment(item.createdDateTime).year(moment().year()),
+            eventType: `${(moment().year() - moment(item.createdDateTime).year())} ${getEndOfNumber((moment().year() - moment(item.createdDateTime).year()))}`,
+            type: 'anniversary'
+          };
         });
-    }
-
-    public getUserPicture(email: string): Promise<Blob> {
-        return graph.users.getById(email).photo.getBlob()
-            .catch(error => { console.error(error); return null; });
-    }
-
-    public getUPNById(id: number): Promise<string> {
-        return sp.web.getUserById(id).get().then((user: any) => user.UserPrincipalName);
-    }
-
-    private async getRecognition(): Promise<Array<Person>> {
-        const filterDateBefore = moment().subtract(this._daysInterval ? this._daysInterval : 1, 'd');
-        const filterDateAfter = moment().add(this._daysInterval ? this._daysInterval : 1, 'd');
-        return await sp.web.lists.getById(Settings.listRecognitions).items
-            .select('*',
-                `${Fields.Employee}/EMail`,
-                `${Fields.Employee}/Id`,
-                `${Fields.Employee}/FirstName`,
-                `${Fields.Employee}/LastName`,
-                `${Fields.Employee}/Department`,
-                )
-            .expand(Fields.Employee)
-            .get().then((usersList: any) => {
-                console.log('usersList: ', usersList)
-                return usersList.map((item: any) => {
-                    return {
-                        id: personType.Recognition + item.Id,
-                        firstName: item[Fields.Employee].FirstName,
-                        lastName: item[Fields.Employee].LastName,
-                        email: item[Fields.Employee].EMail,
-                        userId: item[Fields.Employee].Id,
-                        eventDate: moment(),
-                        eventType: `Recognitions`,
-                        eventTypeDescription: item[Fields.TypeOfRecognition],
-                        type: personType.Recognition,
-                        department: item[Fields.Employee].Department
-                    };
-                });
-            });
-    }
+      });
+  }
 }

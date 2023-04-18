@@ -5,4 +5,6 @@ export interface IRecognitionsProps {
   service: IPersonService;
   context: any;
   profilePageUrl: string;
+  displayNumber: number;
+  showAll: boolean;
 }

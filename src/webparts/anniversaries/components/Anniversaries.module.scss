@@ -25,12 +25,20 @@
       flex-direction: column;
       align-items: center;
       width: 130px;
+      position: relative;
 
       .personImg {
-        margin: 0 0 5px 0;
+        margin: 0
       }
 
-      .personText {
+      .number {
+        position: absolute;
+        margin: 0;
+        top: 15%;
+      }
+
+      .years {
+        font-size: 14px;
         margin: 0;
       }
     }

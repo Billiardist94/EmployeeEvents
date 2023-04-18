@@ -1,5 +1,4 @@
 import moment from "moment";
-import { personType } from "../Constants";
 
 export class Person {
   public id: string;
@@ -9,7 +8,6 @@ export class Person {
   public email: string;
   public eventDate: moment.Moment;
   public eventType: string;
-  public type: personType;
-  public department?: string;
+  public type: string;
   public eventTypeDescription?: string;
 }

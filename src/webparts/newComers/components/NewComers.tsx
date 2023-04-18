@@ -31,7 +31,7 @@ export default class NewComers extends React.Component<INewComersProps, INewCome
 
   public render(): React.ReactElement<INewComersProps> {
     const { items } = this.state;
-    const { isOpenInNewTab, showAll, displayNumber, seeAllLink, context } = this.props;
+    const { isOpenInNewTab, showAll, displayNumber, seeAllLink, context, description } = this.props;
 
     let control = <div>
       <Spinner label='Loading...' />
@@ -46,31 +46,22 @@ export default class NewComers extends React.Component<INewComersProps, INewCome
             return <PersonItemElement key={item.id} person={item} service={this.props.service} profilePageUrl={this.props.profilePageUrl} context={context} />;
           });
 
-        control = <div>
-          <div className={styles.items + " ms-Grid"}>
-            {usersList}
-          </div>
-        </div>;
+        control = <>
+          {usersList}
+        </>
       } else {
-        control = <div className={styles.content}>
-          <div className={styles.nodisplay}>
+        control = <div>
+          <div>
             <span>Nothing To Display</span>
           </div>
         </div>;
       }
     }
 
-    return <div className={styles.content}>
-      <div className={"ms-Grid"}>
-        <div className={`ms-Grid-row ${styles.header}`}>
-          <div className={`ms-Grid-col ms-sm8 ms-md8 ms-lg8 ${styles.hItem}`}>{this.props.title === undefined ? 'New Comers' : this.props.title}</div>
-          <div className={`ms-Grid-col ms-sm4 ms-md4 ms-lg4 ${styles.hItem}`}>
-            {!showAll && seeAllLink !== undefined && seeAllLink.length > 0 ? <a className={styles.allLink} target={isOpenInNewTab ? '_blank' : '_self'} href={seeAllLink}>See All</a> : ''}
-          </div>
-        </div>
-      </div>
+    return <section className={styles.recognitions}>
+      <h2 className={styles.webPartHeader}>{description}</h2>
       {control}
-    </div>;
+    </section>
   }
 
   private loadData(): Promise<Array<Person>> {

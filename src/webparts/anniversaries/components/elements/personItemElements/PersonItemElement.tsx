@@ -32,26 +32,25 @@ export default class PersonItemElement extends React.Component<IPersonItemElemen
     const { person, context } = this.props;
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const icon: string = require(`../../../assets/team_icons/anniversary.svg`);
-
-    console.log('person: ', person)
     return (
       <>
         <div className={styles.personItem}>
-            <LivePersona
-              upn={person.email}
-              template={
-                <>
-                  <Persona imageUrl={this.state.photo} text={`${person.firstName} ${person.lastName}`} secondaryText={person.department} coinSize={64} />
-                </>
-              }
-              serviceScope={context.serviceScope}
-              disableHover={false}
-            />
-            <div className={styles.personContent}>
-              <img src={icon} width={"24px"} height={"24px"} alt="icon" className={styles.personImg} />
-              {person.type === personType.Recognition ? <p className={styles.personText}>{person.eventTypeDescription}</p> : ''}
-            </div>
+          <LivePersona
+            upn={person.email}
+            template={
+              <>
+                <Persona imageUrl={this.state.photo} text={`${person.firstName} ${person.lastName}`} coinSize={64} />
+              </>
+            }
+            serviceScope={context.serviceScope}
+            disableHover={false}
+          />
+          <div className={styles.personContent}>
+            <img src={icon} width={"40px"} height={"40px"} alt="icon" className={styles.personImg} />
+            <p className={styles.number}>{person.eventType.split(' ')[0]}</p>
+            <p className={styles.years}>{person.eventType.split(' ')[1]}</p>
           </div>
+        </div>
       </>
     );
   }

@@ -7,6 +7,7 @@ define([], function() {
     "AppLocalEnvironmentTeams": "The app is running on your local environment as Microsoft Teams app",
     "AppSharePointEnvironment": "The app is running on SharePoint page",
     "AppTeamsTabEnvironment": "The app is running in Microsoft Teams",
-    "TimeIntervalToDisplay": "Time Interval To Display"
+    "TimeIntervalToDisplay": "Time Interval To Display",
+    "NumberOfItemsToDisplayLabel": "Number of items to display",
   }
 });

@@ -35,7 +35,7 @@ export default class PersonItemElement extends React.Component<IPersonItemElemen
 
     return (
       <>
-        <div className={`${styles.item} ms-Grid-row`}>
+        <div className={styles.personItem}>
           <LivePersona
             upn={person.email}
             template={
@@ -46,10 +46,9 @@ export default class PersonItemElement extends React.Component<IPersonItemElemen
             serviceScope={context.serviceScope}
             disableHover={false}
           />
-          <div className={`${styles.type} ${person.type === personType.Anniversary ? styles.anniversaryType : ''} ms-Grid-col ms-sm4 ms-md4 ms-lg4`}>
-            <img src={icon} width={"24px"} height={"24px"} className={`${person.type === personType.Anniversary ? styles.anniversary : ''}`} />
-            {person.type === personType.Anniversary ? <p className={styles.number}>{person.eventType.split(' ')[0]}</p> : ''}
-            <p>{person.type === personType.Anniversary ? person.eventType.split(' ')[1] : person.eventType}</p>
+          <div className={styles.personContent}>
+            <img src={icon} width={"30px"} height={"30px"} alt="icon" className={styles.personImg} />
+            <p className={styles.years}>{person.eventType}</p>
           </div>
         </div>
       </>

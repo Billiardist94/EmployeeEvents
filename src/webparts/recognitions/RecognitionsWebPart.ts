@@ -4,6 +4,7 @@ import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField,
+  PropertyPaneCheckbox,
   PropertyPaneSlider
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
@@ -19,6 +20,8 @@ export interface IRecognitionsWebPartProps {
   description: string;
   timeIntervalToDisplay: number;
   profilePageUrl: string;
+  numberOfItemsToDisplay: number;
+  showAll: boolean;
 }
 
 export default class RecognitionsWebPart extends BaseClientSideWebPart<IRecognitionsWebPartProps> {
@@ -43,6 +46,8 @@ export default class RecognitionsWebPart extends BaseClientSideWebPart<IRecognit
         service: service,
         context: this.context,
         profilePageUrl: this.properties.profilePageUrl,
+        displayNumber: this.properties.numberOfItemsToDisplay,
+        showAll: this.properties.showAll,
       }
     );
 
@@ -71,13 +76,17 @@ export default class RecognitionsWebPart extends BaseClientSideWebPart<IRecognit
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
                 }),
-                PropertyPaneSlider("timeIntervalToDisplay", {
-                  label: strings.TimeIntervalToDisplay,
+                PropertyPaneCheckbox("showAll", {
+                  text: "Display All Items"
+                }),
+                PropertyPaneSlider("numberOfItemsToDisplay", {
+                  label: strings.NumberOfItemsToDisplayLabel,
                   min: 1,
-                  max: 14,
-                  value: 1,
+                  max: 12,
+                  value: 3,
                   showValue: true,
                   step: 1,
+                  disabled: this.properties.showAll
                 }),
               ]
             }

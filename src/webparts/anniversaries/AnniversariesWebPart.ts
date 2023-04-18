@@ -14,8 +14,9 @@ import "@pnp/sp/webs";
 import * as strings from 'AnniversariesWebPartStrings';
 import Anniversaries from './components/Anniversaries';
 import { IAnniversariesProps } from './components/IAnniversariesProps';
-import { PersonService } from './service/PersonService';
+
 import { Person } from './service/Person';
+import { PersonService } from './service/PersonService';
 
 export interface IAnniversariesWebPartProps {
   description: string;

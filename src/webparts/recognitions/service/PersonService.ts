@@ -48,7 +48,6 @@ export class PersonService implements IPersonService {
                 )
             .expand(Fields.Employee)
             .get().then((usersList: any) => {
-                console.log('usersList: ', usersList)
                 return usersList.map((item: any) => {
                     return {
                         id: personType.Recognition + item.Id,
