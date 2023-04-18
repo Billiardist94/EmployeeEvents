@@ -66,12 +66,8 @@ export default class RecognitionsWebPart extends BaseClientSideWebPart<IRecognit
     return {
       pages: [
         {
-          header: {
-            description: strings.PropertyPaneDescription
-          },
           groups: [
             {
-              groupName: strings.BasicGroupName,
               groupFields: [
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel

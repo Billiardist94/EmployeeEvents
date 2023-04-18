@@ -29,7 +29,7 @@ export default class Anniversaries extends React.Component<IAnniversariesProps, 
 
   public render(): React.ReactElement<IAnniversariesProps> {
     const { items } = this.state;
-    const { isOpenInNewTab, showAll, displayNumber, seeAllLink, context, description } = this.props;
+    const { showAll, displayNumber, context, description } = this.props;
     let control = <div>
       <Spinner label='Loading...' />
     </div>;

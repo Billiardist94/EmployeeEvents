@@ -8,7 +8,7 @@ import {
   PropertyPaneCheckbox
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-import * as strings from 'EmployeeEventsWebPartStrings';
+import * as strings from 'NewComersWebPartStrings';
 import { PersonService } from './service/PersonService';
 import { Person } from './service/Person';
 import { INewComersProps } from './components/INewComersProps';
@@ -72,10 +72,9 @@ export default class NewComersWebPart extends BaseClientSideWebPart<INewComersWe
         {
           groups: [
             {
-              groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('title', {
-                  label: 'Title',
+                PropertyPaneTextField('description', {
+                  label: strings.DescriptionFieldLabel
                 }),
                 PropertyPaneCheckbox("showAll", {
                   text: "Display All Items"

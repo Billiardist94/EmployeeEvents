@@ -1,12 +1,10 @@
 import * as React from 'react';
 import styles from './NewComers.module.scss';
 import { Person } from '../service/Person';
-import { FontIcon, Persona, PersonaPresence, PersonaSize, Spinner } from 'office-ui-fabric-react';
-import { personType } from '../Constants';
+import { Spinner } from 'office-ui-fabric-react';
 import PersonItemElement from './elements/personItemElements/PersonItemElement';
 import { INewComersProps } from './INewComersProps';
 import { INewComersState } from './INewComersState';
-import { IEmployeeEventsProps } from '../../employeeEvents/components/IEmployeeEventsProps';
 
 export default class NewComers extends React.Component<INewComersProps, INewComersState> {
   constructor(props?: INewComersProps) {
@@ -31,7 +29,7 @@ export default class NewComers extends React.Component<INewComersProps, INewCome
 
   public render(): React.ReactElement<INewComersProps> {
     const { items } = this.state;
-    const { isOpenInNewTab, showAll, displayNumber, seeAllLink, context, description } = this.props;
+    const { showAll, displayNumber, context, description } = this.props;
 
     let control = <div>
       <Spinner label='Loading...' />

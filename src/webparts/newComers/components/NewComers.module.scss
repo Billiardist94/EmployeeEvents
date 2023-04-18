@@ -1,10 +1,10 @@
 @import '~office-ui-fabric-react/dist/sass/References.scss';
 
-// :global {
-//   div[id*="workbenchPageContent"] {
-//     max-width: 1220px;
-//   }
-// }
+:global {
+  div[id*="workbenchPageContent"] {
+    max-width: 1220px;
+  }
+}
 
 .recognitions {
   display: flex;

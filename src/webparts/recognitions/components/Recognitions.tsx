@@ -3,9 +3,7 @@ import styles from './Recognitions.module.scss';
 import { IRecognitionsProps } from './IRecognitionsProps';
 import { IRecognitionsState } from './IRecognitionsState';
 import { Person } from '../service/Person';
-import { LivePersona } from '@pnp/spfx-controls-react';
-import { Persona, Spinner } from 'office-ui-fabric-react';
-import { personType } from '../Constants';
+import { Spinner } from 'office-ui-fabric-react';
 import PersonItemElement from './elements/personItemElements/PersonItemElement';
 
 export default class Recognitions extends React.Component<IRecognitionsProps, IRecognitionsState> {

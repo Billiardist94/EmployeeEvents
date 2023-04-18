@@ -76,15 +76,11 @@ export default class AnniversariesWebPart extends BaseClientSideWebPart<IAnniver
     return {
       pages: [
         {
-          header: {
-            description: strings.PropertyPaneDescription
-          },
           groups: [
             {
-              groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('title', {
-                  label: 'Title',
+                PropertyPaneTextField('description', {
+                  label: strings.DescriptionFieldLabel
                 }),
                 PropertyPaneCheckbox("showAll", {
                   text: "Display All Items"

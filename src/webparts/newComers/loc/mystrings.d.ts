@@ -1,4 +1,4 @@
-declare interface IEmployeeEventsWebPartStrings {
+declare interface INewComersWebPartStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
   DescriptionFieldLabel: string;
@@ -10,7 +10,7 @@ declare interface IEmployeeEventsWebPartStrings {
   NumberOfItemsToDisplayLabel: string;
 }
 
-declare module 'EmployeeEventsWebPartStrings' {
-  const strings: IEmployeeEventsWebPartStrings;
+declare module 'NewComersWebPartStrings' {
+  const strings: INewComersWebPartStrings;
   export = strings;
 }
